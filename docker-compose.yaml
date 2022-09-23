@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  redis:
+        image: redis
+        container_name: redis
+        ports:
+            - 6379:6379
+        networks:
+            app-network:
+                ipv4_address: 10.0.0.9
+
+networks:
+    app-network:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: "10.0.0.0/16"

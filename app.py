@@ -1,6 +1,7 @@
 from pickle import FALSE
 from flask import Flask, request, jsonify
 import redis
+import json
 
 model = None
 app = Flask(__name__)
@@ -34,6 +35,30 @@ def get_users():
         users.append([k.decode("utf-8"),user])
     
     return users
+
+'''
+    GET user by id
+    SET user cache after first route execution
+    CACHE EXAMPLE
+'''
+@app.route('/users/<id>', methods=['GET'])
+def get_user_by_id(id):
+    cache_string = 'cache:user'
+    cache_user = redis.get(cache_string)
+
+    if cache_user == None:
+        key = 'user' + str(id)
+        user = redis.get(key)
+        redis.set(cache_string,user)
+        redis.expire(cache_string,5) # set a five seconds cache expire time
+        data = {}
+        data['user'] = user.decode('utf-8', 'ignore')
+        return jsonify(str(data))
+    else:
+        userc = redis.get(cache_string)
+        data = {}
+        data['user cache'] = userc.decode('utf-8', 'ignore')
+        return jsonify(str(data))
 
 if __name__ == '__main__':
     # app.run(host="0.0.0.0", debug=True)

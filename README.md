@@ -57,4 +57,14 @@ OBJECT ENCODING user1 # encoding representation of the key value
 
 OBJECT IDLETIME user1 # returns the amount of seconds that the object is without beeing called
 
+INCR x # increments the key value plus one
+
+DECR x # decrements the key value minus one
+
+APPEND user vinicius # appends the vinicius value at the end of the key user
+
+GETRANGE user 2 7 # get a string subset from start 2 until end 7
+
+SETRANGE user 8 " vinicius" # appends string "vinicius" by position 8
+
 ```

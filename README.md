@@ -4,6 +4,23 @@ This repository is about REDIS.
 
 Created by: Gustavo Vinicius de Morais
 
+### Python Docker
+```
+docker-compose up -d --build
+docker exec -it -u 0 python sh
+python app.py
+
+GET http://localhost/users
+
+POST http://localhost/users
+{
+    "key":"user2",
+    "value": "asfasdf"
+}
+
+```
+
+### Redis Commands
 ```
 
 redis-cli # access redis database
@@ -29,5 +46,15 @@ RESTORE test1 0 "\x00\x11gustavo@email.com\n\x00@\xe8\xa9\x14\x04\xab\x8b\xe2" #
 EXISTS user1 # verify if some key exists, returns 1 for true and 0 for false
 
 RENAME user1 user2 # renames a key to another name
+
+SCAN 0 # show the keys, the 0 number is a cursor ID
+
+SCAN 0 MATCH *us* COUNT 10 # brings 10 keys with the 'us' letters
+
+OBJECT REFCOUNT user1 # return the qty of references of the pattern
+
+OBJECT ENCODING user1 # encoding representation of the key value
+
+OBJECT IDLETIME user1 # returns the amount of seconds that the object is without beeing called
 
 ```

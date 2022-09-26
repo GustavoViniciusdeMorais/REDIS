@@ -1,14 +1,29 @@
 version: '3'
 
 services:
-  redis:
-        image: redis
-        container_name: redis
+    redis:
+            image: redis
+            container_name: redis
+            ports:
+                - 6379:6379
+            networks:
+                app-network:
+                    ipv4_address: 10.0.0.9
+
+    python:
+        container_name: python
+        build:
+            context: .
+            dockerfile: python.dockerfile
         ports:
-            - 6379:6379
+            - 80:8000
+        volumes:
+            - ./:/code
+        depends_on:
+            - redis
         networks:
-            app-network:
-                ipv4_address: 10.0.0.9
+                app-network:
+                    ipv4_address: 10.0.0.7
 
 networks:
     app-network:

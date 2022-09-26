@@ -67,4 +67,8 @@ GETRANGE user 2 7 # get a string subset from start 2 until end 7
 
 SETRANGE user 8 " vinicius" # appends string "vinicius" by position 8
 
+expire cache:user 10 # set a time of 10 seconds expiration to a key
+
+ttl cache:user # get the valie time in seconds of the key
+
 ```

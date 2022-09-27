@@ -71,4 +71,54 @@ expire cache:user 10 # set a time of 10 seconds expiration to a key
 
 ttl cache:user # get the valie time in seconds of the key
 
+CONFIG GET PORT # show the port where the redis is running
+
+CONFIG SET REQUIREPASS gustavo # config a password with value gustavo
+
+AUTH gustavo # auth the user with the password
+
+INFO # show infos about the redis server
+
+MONITOR # listen to events on redis
+
+SLOWLOG GET # show some logs
+
 ```
+
+### Redis RDB (is a redis snapshot of a point in time)
+```
+SAVE # creates a snapshot
+
+SAVE 5000 # save snapshot after some change monitoring every 5 seconds
+
+```
+
+### Redis Hashs
+
+It is a way to build a key with many fields
+
+```
+
+HSET user2 name gustavo pass 123 # creates a user2 key with name and pass fields
+
+HGETALL user2 # get all fields from the user2 key
+
+```
+
+### Redis List
+
+```
+
+LPUSH list1 1 2 3 # builds a list pushing elements from the left
+
+RPUSH list1 1 2 3 # builds a list pushing elements from the right
+
+LRANGE list1 0 3 # list the elements from range 0 to 3
+
+LLEN list1 # shows the size of the list
+
+LRANGE list1 0 -1 # gets all elements from list1
+
+```
+
+![TDD](./imgs/monitor.png)

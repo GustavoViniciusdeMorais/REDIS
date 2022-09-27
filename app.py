@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 redis = redis.Redis(
      host= 'redis',
-     port= '6379')
+     port= '6379',
+     password='gustavo')
 
 @app.route('/')
 def home_endpoint():
